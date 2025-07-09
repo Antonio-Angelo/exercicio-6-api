@@ -1,0 +1,77 @@
+<html>
+<body>
+
+<h1 id="msg">Mensagem do dia</h1>
+<br>
+<p id="temperamento"></p>
+<style>
+  body {
+      margin: 0;
+      height: 100vh; /* altura total da tela */
+      display: flex;
+      flex-direction: column;
+      justify-content: center; /* verticalmente */
+      align-items: center;     /* horizontalmente */
+
+      background-image: url('fotoatividade.jpg');
+      background-repeat: no-repeat;   /* para não repetir */
+      background-size: cover;          /* para cobrir todo o fundo */
+      background-position: center;     /* centralizar  */
+
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      color: #000000;
+      text-align: center;
+      padding: 20px;
+    }
+
+    /* Título */
+    h1#msg {
+      font-size: 3rem;
+      margin-bottom: 20px;
+      text-shadow: 1px 1px 4px rgba(0,0,0,0.2);
+    }
+
+    /* conselho */
+    p#temperamento {
+      font-size: 1.5rem;
+      max-width: 600px;
+      background-color: rgba(255, 255, 255, 0.85);
+      padding: 15px 25px;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+      line-height: 1.4;
+      user-select: none;
+    }
+  
+</style>
+
+<script>
+
+let data;
+
+
+async function doguinho() {
+  try {
+    const response = await fetch("	https://api.adviceslip.com/advice", {
+      
+    });
+    data = await response.json();
+    console.log(data.slip.advice);
+
+    // Lança na página
+
+    document.getElementById('temperamento').innerHTML = data.slip.advice
+
+    
+
+  } catch (error) {
+    console.error('Erro:', error);
+  }
+}
+
+// Chamar a função
+doguinho();
+</script>    
+
+</body>
+</html>
